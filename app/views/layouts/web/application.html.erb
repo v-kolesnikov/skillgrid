@@ -2,13 +2,17 @@
 <html>
 <head>
   <title>RubyInternship</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<section id="container">
+  <h1>Ruby internship 2015</h1>
+  <%= link_to "SignUp", new_user_path %>
+  <%= link_to "SignIn", new_user_path %>
+  <%= yield %>
+</section>
 </body>
 </html>
