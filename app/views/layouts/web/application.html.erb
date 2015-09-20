@@ -7,19 +7,24 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-
-
 <section id="container">
   <h1>Ruby internship 2015</h1>
 
-  <% if logged_in? %>
-    <%= link_to current_user.email, user_path(current_user) %>
-    <%= link_to "Logout", logout_path if current_user %>
-  <% else %>
-    <%= link_to "SignUp", signup_path %>
-    <%= link_to "SignIn", signin_path %>
-  <% end %>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <% if logged_in? %>
+        <p class="navbar-text"><%= link_to current_user.email, user_path(current_user) %></p>
+        <p class="navbar-text"><%= link_to "Logout", logout_path if current_user %></p>
+      <% else %>
+        <p class="navbar-text"><%= link_to "SignUp", signup_path %></p>
+        <p class="navbar-text"><%= link_to "SignIn", signin_path %></p>
+      <% end %>
+      <p class="navbar-text"><%= link_to "Products", products_path %></p>
+      <p class="navbar-text"><%= link_to "Add product", new_product_path %></p>
+    </div>
+  </nav>
 
   <p/>
   <% flash.each do |type, message| %>
@@ -30,5 +35,6 @@
 
   <%= yield %>
 </section>
+
 </body>
 </html>

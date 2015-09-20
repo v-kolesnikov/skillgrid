@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   scope module: :web do
     root "welcome#index"
 
-    resources :products
     resources :users
+    resources :products
+
     resource :sessions, only: [:new, :create, :destroy]
 
     get "signin" => "sessions#new"

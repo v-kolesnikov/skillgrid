@@ -1,0 +1,6 @@
+<h1>Product details</h1>
+
+<p>Name: <%= @product.name %></p>
+<p>Description: <%= @product.description %></p>
+
+<%= link_to "Remove", product_path(@product), method: :delete %>
