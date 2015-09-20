@@ -13,8 +13,13 @@
 <section id="container">
   <h1>Ruby internship 2015</h1>
 
-  <%= link_to "SignUp", signup_path %>
-  <%= link_to "SignIn", signin_path %>
+  <% if logged_in? %>
+    <%= link_to current_user.email, user_path(current_user) %>
+    <%= link_to "Logout", logout_path if current_user %>
+  <% else %>
+    <%= link_to "SignUp", signup_path %>
+    <%= link_to "SignIn", signin_path %>
+  <% end %>
 
   <p/>
   <% flash.each do |type, message| %>

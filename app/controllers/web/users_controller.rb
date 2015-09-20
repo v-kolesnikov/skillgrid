@@ -15,6 +15,7 @@ class Web::UsersController < Web::ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      sign_in @user
       redirect_to root_path
     else
       render :new

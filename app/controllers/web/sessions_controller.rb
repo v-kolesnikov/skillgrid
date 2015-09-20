@@ -15,6 +15,8 @@ class Web::SessionsController < Web::ApplicationController
   end
 
   def destroy
+    log_out
+    redirect_to root_path
   end
 
   private
