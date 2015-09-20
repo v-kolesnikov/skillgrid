@@ -27,6 +27,12 @@ gem "sdoc", "~> 0.4.0", group: :doc
 
 gem "simple_form"
 
+# File attachment library for Active Record
+gem "paperclip"
+# Use Amazon S3 file storage
+gem "aws-sdk-v1"
+gem "aws-sdk"
+
 # Use ActiveModel has_secure_password
 gem "bcrypt", "~> 3.1.7"
 
