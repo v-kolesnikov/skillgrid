@@ -8,10 +8,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
 <section id="container">
   <h1>Ruby internship 2015</h1>
-  <%= link_to "SignUp", new_user_path %>
-  <%= link_to "SignIn", new_user_path %>
+
+  <%= link_to "SignUp", signup_path %>
+  <%= link_to "SignIn", signin_path %>
+
+  <p/>
+  <% flash.each do |type, message| %>
+    <div class="alert <%= bootstrap_class_for(type) %>" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+
   <%= yield %>
 </section>
 </body>
