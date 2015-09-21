@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+ #container {
+   margin: 48px auto;
+   width: 960px;
+
+   > {
+     section {
+       clear: both;
+     }
+
+     header {
+       margin-bottom: 46px;
+
+       > h1 {
+         float: left;
+         margin: 0;
+       }
+     }
+   }
+ }
+
+ .clearfix:after {
+   clear: both;
+   content: ".";
+   display: block;
+   height: 0;
+   line-height: 0;
+   visibility: hidden;
+ }
+
+ html[xmlns].clearfix {
+   display: block;
+ }
+
+ * html .clearfix {
+   height: 1%;
+ }

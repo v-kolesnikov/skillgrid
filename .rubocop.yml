@@ -18,8 +18,9 @@ AllCops:
   Exclude:
   - "vendor/**/*"
   - "db/schema.rb"
+  - "config/initializers/simple_form_bootstrap.rb"
   RunRailsCops: true
-  DisplayCopNames: false
+  DisplayCopNames: true
   StyleGuideCopsOnly: false
 Style/AccessModifierIndentation:
   Description: Check indentation of private/protected visibility modifiers.
