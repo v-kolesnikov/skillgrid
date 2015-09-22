@@ -7,18 +7,18 @@ default: &default
 
 development:
   <<: *default
-  database: ruby_internship_development
+  database: skillgrid_development
   username: postgres
   password:
 
 test:
   <<: *default
-  database: ruby_internship_test
+  database: skillgrid_test
   username: postgres
   password:
 
 production:
   <<: *default
-  database: ruby_internship_production
+  database: skillgrid_production
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>

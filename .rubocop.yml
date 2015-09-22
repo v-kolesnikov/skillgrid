@@ -18,7 +18,8 @@ AllCops:
   Exclude:
   - "vendor/**/*"
   - "db/schema.rb"
-  - "config/initializers/simple_form_bootstrap.rb"
+  - "db/migrate/*.rb"
+  - "config/initializers/*.rb"
   RunRailsCops: true
   DisplayCopNames: true
   StyleGuideCopsOnly: false

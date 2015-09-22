@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_many :products, foreign_key: :owner_id
-
-  validates :email, presence: true, uniqueness: true
-  validates :login, presence: true
-  validates :password, length: { minimum: 6 }, if: :new_record?
-
-  has_secure_password
 end

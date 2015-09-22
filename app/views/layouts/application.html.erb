@@ -14,12 +14,12 @@
 
   <nav class="navbar navbar-default">
     <div class="container">
-      <% if logged_in? %>
-        <p class="navbar-text"><%= link_to current_user.email, user_path(current_user) %></p>
-        <p class="navbar-text"><%= link_to "Logout", logout_path if current_user %></p>
+      <% if user_signed_in? %>
+        <p class="navbar-text"><%= current_user.email %></p>
+        <p class="navbar-text"><%= link_to "Logout", destroy_user_session_path, method: :delete if current_user %></p>
       <% else %>
-        <p class="navbar-text"><%= link_to "SignUp", signup_path %></p>
-        <p class="navbar-text"><%= link_to "SignIn", signin_path %></p>
+        <p class="navbar-text"><%= link_to "Sign In", new_user_session_path %></p>
+        <p class="navbar-text"><%= link_to "Sign Up", new_user_registration_path %></p>
       <% end %>
       <p class="navbar-text"><%= link_to "Products", products_path %></p>
       <p class="navbar-text"><%= link_to "Add product", new_product_path %></p>

@@ -1,5 +1,6 @@
-class Web::ProductsController < Web::ApplicationController
+class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :destroy]
+  before_action :authenticate_user!
 
   def index
     @products = current_user.products
