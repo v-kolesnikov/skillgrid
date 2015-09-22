@@ -1,4 +1,6 @@
 FactoryGirl.define do
-  factory :user do
+  factory :shop_owner do
+    
   end
+
 end
