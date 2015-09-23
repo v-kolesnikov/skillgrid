@@ -5,4 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :account, polymorphic: true
+  accepts_nested_attributes_for :account
+
+  def build_account(params)
+    if self.account_id?
+      account.update_attributes(params)
+    elsif account_type?
+      self.account = account_type.constantize.new(params)
+    end
+  end
 end

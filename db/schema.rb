@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150922193347) do
   create_table "admins", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
-    t.date     "birthday"
+    t.date     "birthdate"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "avatar_file_name"

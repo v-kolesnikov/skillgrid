@@ -3,7 +3,7 @@ class CreateAdmins < ActiveRecord::Migration
     create_table :admins do |t|
       t.string :firstname
       t.string :lastname
-      t.date :birthday
+      t.date :birthdate
 
       t.timestamps null: false
     end
