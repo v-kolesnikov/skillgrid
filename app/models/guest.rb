@@ -1,3 +1,3 @@
 class Guest < ActiveRecord::Base
-  has_one :user, as: :account
+  has_one :user, as: :account, dependent: :destroy
 end
