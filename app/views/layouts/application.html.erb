@@ -22,7 +22,9 @@
         <p class="navbar-text"><%= link_to "Sign Up", new_user_registration_path %></p>
       <% end %>
       <p class="navbar-text"><%= link_to "Products", products_path %></p>
-      <p class="navbar-text"><%= link_to "Add product", new_product_path %></p>
+      <% if current_user && current_user.account.is_a?(ShopOwner) %>
+        <p class="navbar-text"><%= link_to "Add product", new_product_path %></p>
+      <% end %>
     </div>
   </nav>
 

@@ -10,5 +10,9 @@ Rails.application.routes.draw do
                                     as: :sign_up_shop_owner
   end
 
-  resources :products
+  resources :products do
+    member do
+      put "set_pro"
+    end
+  end
 end

@@ -58,8 +58,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    extras = [:account_type, account_attributes: [:name, :firstname, :lastname,
-                                                  :birthdate, :avatar, :photo,]]
+    account_attributes = {
+      account_attributes: [:name, :firstname, :lastname, :birthdate, :avatar,
+                           :photo, :shop_name] }
+    extras = [:account_type, account_attributes]
     extras.each { |atr| devise_parameter_sanitizer.for(:sign_up) << atr }
   end
 
