@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
-  scope module: :web do
-    root "welcome#index"
+  root "welcome#index"
 
-    resources :users
-    resources :products
+  devise_for :users, controllers: { registrations: "registrations" }
 
-    resource :sessions, only: [:new, :create, :destroy]
+  devise_scope :user do
+    get "users/sign_up/admin", to: "registrations#new_admin", as: :sign_up_admin
+    get "users/sign_up/guest", to: "registrations#new_guest", as: :sign_up_guest
+    get "users/sign_up/shop_owner", to: "registrations#new_shop_owner",
+                                    as: :sign_up_shop_owner
+  end
 
-    get "signin" => "sessions#new"
-    post "signin" => "sessions#create"
-    get "logout" => "sessions#destroy"
-
-    get "signup" => "users#new"
-    post "signup" => "users#create"
+  resources :products do
+    member do
+      put "set_pro"
+    end
   end
 end

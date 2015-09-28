@@ -1,9 +1,21 @@
 class User < ActiveRecord::Base
-  has_many :products, foreign_key: :owner_id
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
 
-  validates :email, presence: true, uniqueness: true
-  validates :login, presence: true
-  validates :password, length: { minimum: 6 }, if: :new_record?
+  belongs_to :account, polymorphic: true
+  accepts_nested_attributes_for :account
 
-  has_secure_password
+  def build_account(params)
+    if self.account_id?
+      account.update_attributes(params)
+    elsif account_type?
+      self.account = account_type.constantize.new(params)
+    end
+  end
 end

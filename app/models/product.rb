@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  belongs_to :owner, class_name: "User"
+  belongs_to :owner, class_name: "ShopOwner"
 
   validates :name, :description, presence: true
 
@@ -7,4 +7,22 @@ class Product < ActiveRecord::Base
                             default_url: "products/missing/:style/missing.png"
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ },
                                size: { in: 0..1.megabytes }
+
+  after_initialize :set_pro, if: :new_record?
+
+  def owned_by?(user)
+    owner.user == user
+  end
+
+  def shop_name
+    owner.shop_name
+  end
+
+  def self.for_guests
+    Product.where(pro: false)
+  end
+
+  def set_pro
+    self.pro = false
+  end
 end

@@ -29,12 +29,16 @@ gem "simple_form"
 
 # File attachment library for Active Record
 gem "paperclip"
-# Use Amazon S3 file storage
-gem "aws-sdk-v1"
-gem "aws-sdk"
 
 # Use ActiveModel has_secure_password
-gem "bcrypt", "~> 3.1.7"
+# gem "bcrypt", "~> 3.1.7"
+gem "devise"
+
+group :production do
+  # Use Amazon S3 file storage
+  gem "aws-sdk-v1"
+  gem "aws-sdk"
+end
 
 group :development do
   gem "guard-livereload"
