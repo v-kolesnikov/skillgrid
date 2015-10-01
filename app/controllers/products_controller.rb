@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy, :set_pro]
+  before_action :find_product, except: [:index, :new, :create, :buy_complete]
   before_action :authenticate_user!, except: [:index]
   before_action :shop_require, only: [:new, :edit, :create, :destroy, :my]
-  before_action :shop_owner_require, only: [:edit, :update, :destroy]
+
   before_action :admin_require, only: [:set_pro]
+  before_action :guest_require, only: [:buy]
+  before_action :shop_owner_require, only: [:edit, :update, :destroy]
 
   def index
     if current_user
@@ -53,6 +55,22 @@ class ProductsController < ApplicationController
     end
   end
 
+  def buy
+    if @guest.can_buy? && @product.can_purchase?
+      if Shop.buy(@guest.user, @product)
+        flash[:success] = "Complete buy product #{@product.name}"
+      else
+        flash[:danger] = "Error buy product #{@product.name}"
+      end
+    else
+      flash[:danger] = "Error buying!"
+    end
+    redirect_to products_path
+  end
+
+  def buy_complete
+  end
+
   private
 
   def product_params
@@ -65,6 +83,14 @@ class ProductsController < ApplicationController
 
   def admin_require
     redirect_to root_path unless current_user.account.is_a?(Admin)
+  end
+
+  def guest_require
+    if current_user.account.is_a?(Guest)
+      @guest = current_user.account
+    else
+      redirect_to root_path
+    end
   end
 
   def shop_owner_require
