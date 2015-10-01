@@ -6,7 +6,7 @@ class Shop
   TODOS_URL = "http://jsonplaceholder.typicode.com/todos"
   IMAGES_COUNT = 5000
 
-  def self.buy(user, product)
+  def self.buy(user, _product)
     photo = get_photo
     if correct_colors?(photo)
       PurchaseMailer.user_notification(user, photo[:url])
@@ -17,7 +17,7 @@ class Shop
     end
   end
 
-  protected
+  # Internal
 
   def self.get_photo
     api_request("#{IMAGES_URL}/#{photo_id}")
