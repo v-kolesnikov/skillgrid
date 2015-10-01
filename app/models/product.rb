@@ -25,4 +25,8 @@ class Product < ActiveRecord::Base
   def set_pro
     self.pro = false
   end
+
+  def can_purchase?
+    !self.pro? && owner.shop_name.present?
+  end
 end
