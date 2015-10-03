@@ -56,19 +56,13 @@ class ProductsController < ApplicationController
   end
 
   def buy
-    if @guest.can_buy? && @product.can_purchase?
-      if Shop.buy(@guest.user, @product)
-        flash[:success] = "Complete buy product #{@product.name}"
-      else
-        flash[:danger] = "Error buy product #{@product.name}"
-      end
-    else
-      flash[:danger] = "Error buying!"
+    begin
+      Shop.buy(@guest, @product)
+      flash[:success] = "Purchase '#{@product.name}' complete!"
+    rescue ShopService::InternalError => e
+      flash[:danger] = e.message
     end
     redirect_to products_path
-  end
-
-  def buy_complete
   end
 
   private

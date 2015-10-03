@@ -8,7 +8,9 @@ class Product < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ },
                                size: { in: 0..1.megabytes }
 
-  after_initialize :set_pro, if: :new_record?
+  after_initialize :set_defaults, if: :new_record?
+
+  scope :for_guests, -> { where(pro: false) }
 
   def owned_by?(user)
     owner.user == user
@@ -18,11 +20,7 @@ class Product < ActiveRecord::Base
     owner.shop_name
   end
 
-  def self.for_guests
-    Product.where(pro: false)
-  end
-
-  def set_pro
+  def set_defaults
     self.pro = false
   end
 
